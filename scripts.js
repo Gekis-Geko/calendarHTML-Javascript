@@ -12,7 +12,7 @@ showCalendar(currentMonth, currentYear);
 
 function next() {
     currentYear = (currentMonth === 11) ? currentYear + 1 : currentYear;
-    currentMonth = (currentMonth + 1) % 12;
+    currentMonth = (currentMonth == 11) ? 0 : currentMonth + 1;
     showCalendar(currentMonth, currentYear);
 }
 
@@ -28,10 +28,16 @@ function jump() {
     showCalendar(currentMonth, currentYear);
 }
 
+function jumpToNow() {
+        currentYear = (new Date()).getFullYear();
+        currentMonth = (new Date()).getMonth();
+        showCalendar(currentMonth, currentYear);
+}
+
 function showCalendar(month, year) {
 
     let firstDay = (new Date(year, month)).getDay();
-    let daysInMonth = 32 - new Date(year, month, 32).getDate();
+    let daysInMonth = (new Date(year, month + 1, 0)).getDate();
 
     let tbl = document.getElementById("calendar-body"); // body of the calendar
 
